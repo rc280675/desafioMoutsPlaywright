@@ -4,8 +4,10 @@ test.beforeEach(async ({ request }) => {
   console.log('Iniciando teste de API');
 });
 
-test.afterEach(async ({}, testInfo) => {
+test.afterEach(async ({ page }, testInfo) => {
   if (testInfo.status !== testInfo.expectedStatus) {
-    console.log(`❌ Falha no teste: ${testInfo.title}`);
+    await page.screenshot({
+      path: `screenshots/${testInfo.title}.png`
+    });
   }
 });
